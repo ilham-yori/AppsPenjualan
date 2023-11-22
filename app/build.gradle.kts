@@ -51,6 +51,7 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.6.2")
 
     implementation("androidx.room:room-runtime:2.5.2")
+    implementation("androidx.legacy:legacy-support-v4:1.0.0")
     ksp("androidx.room:room-compiler:2.5.2")
     implementation ("androidx.room:room-ktx:2.5.2")
 
