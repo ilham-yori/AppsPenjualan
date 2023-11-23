@@ -4,29 +4,30 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ilhamyp.appspenjualan.databinding.ItemRowDataBinding
+import com.ilhamyp.appspenjualan.model.Mobil
 import com.ilhamyp.appspenjualan.model.Motor
 
-class ListMotorAdapter () : RecyclerView.Adapter<ListMotorAdapter.ListViewHolder>() {
+class ListMobilAdapater() : RecyclerView.Adapter<ListMobilAdapater.ListViewHolder>() {
 
     private lateinit var onItemClickCallback: OnItemClickCallback
-    private val list = ArrayList<Motor>()
+    private val list = ArrayList<Mobil>()
 
     inner class ListViewHolder(val binding : ItemRowDataBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(motor : Motor) {
+        fun bind(mobil : Mobil) {
             with(binding) {
-                tvTahunKeluaran.text = motor.tahunKeluaran
-                tvMesin.text = motor.mesin
-                tvWarna.text = motor.warna
-                tvStock.text = motor.stock
+                tvTahunKeluaran.text = mobil.tahunKeluaran
+                tvMesin.text = mobil.mesin
+                tvWarna.text = mobil.warna
+                tvStock.text = mobil.stock
             }
 
             binding.root.setOnClickListener{
-                onItemClickCallback.onItemClicked(motor)
+                onItemClickCallback.onItemClicked(mobil)
             }
         }
     }
 
-    override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ListMobilAdapater.ListViewHolder, position: Int) {
         holder.bind(list[position])
     }
 
@@ -34,7 +35,7 @@ class ListMotorAdapter () : RecyclerView.Adapter<ListMotorAdapter.ListViewHolder
         this.onItemClickCallback = onItemClickCallback
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListMobilAdapater.ListViewHolder {
         val view = ItemRowDataBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ListViewHolder((view))
     }
@@ -42,12 +43,12 @@ class ListMotorAdapter () : RecyclerView.Adapter<ListMotorAdapter.ListViewHolder
     override fun getItemCount() : Int  = list.size
 
     interface OnItemClickCallback {
-        fun onItemClicked(data: Motor)
+        fun onItemClicked(data: Mobil)
     }
 
-    fun loadListUser(motor: List<Motor>) {
+    fun loadListUser(mobil: List<Mobil>) {
         list.clear()
-        list.addAll(motor)
+        list.addAll(mobil)
         notifyDataSetChanged()
     }
 }

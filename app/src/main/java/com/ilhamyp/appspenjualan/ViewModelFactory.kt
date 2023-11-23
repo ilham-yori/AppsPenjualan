@@ -3,7 +3,7 @@ package com.ilhamyp.appspenjualan
 import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.ilhamyp.appspenjualan.viewmodel.MainViewModel
+import com.ilhamyp.appspenjualan.viewmodel.MobilViewModel
 import com.ilhamyp.appspenjualan.viewmodel.MotorViewModel
 
 class ViewModelFactory private constructor(private val mApplication: Application) : ViewModelProvider.NewInstanceFactory() {
@@ -23,8 +23,8 @@ class ViewModelFactory private constructor(private val mApplication: Application
 
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(MainViewModel::class.java)) {
-            return MainViewModel(mApplication) as T
+        if (modelClass.isAssignableFrom(MobilViewModel::class.java)) {
+            return MobilViewModel(mApplication) as T
         } else if (modelClass.isAssignableFrom(MotorViewModel::class.java)) {
             return MotorViewModel(mApplication) as T
         }

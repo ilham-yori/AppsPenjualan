@@ -8,7 +8,9 @@ import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.ViewModelProvider
 import com.ilhamyp.appspenjualan.databinding.ActivityDetailDataBinding
+import com.ilhamyp.appspenjualan.model.Mobil
 import com.ilhamyp.appspenjualan.model.Motor
+import com.ilhamyp.appspenjualan.viewmodel.MobilViewModel
 import com.ilhamyp.appspenjualan.viewmodel.MotorViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -19,7 +21,9 @@ class DetailDataActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityDetailDataBinding
     private lateinit var motorViewModel: MotorViewModel
+    private lateinit var mobilViewModel: MobilViewModel
     private lateinit var motor: Motor
+    private lateinit var mobil: Mobil
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,25 +33,15 @@ class DetailDataActivity : AppCompatActivity() {
 
         val typeIntent = intent.getStringExtra("detail_type")
         val idIntent = intent.getIntExtra("data_kendaraan",0)
-        motorViewModel = obtainMaiModel(this@DetailDataActivity)
+        motorViewModel = obtainMotorViewModel(this@DetailDataActivity)
+        mobilViewModel = obtainMobilViewModel(this@DetailDataActivity)
 
         if(typeIntent == "Motor"){
+
             CoroutineScope(Dispatchers.IO).launch {
-                val check = motorViewModel.getSpecificMotor(idIntent)
+                motor = motorViewModel.getSpecificMotor(idIntent)
                 withContext(Dispatchers.Main) {
-                    if (check == null) {
-                        Log.d("Error Data", "Data Not Found")
-                    } else {
-                        motor = check
-                        binding.tvDetailTahunKeluaran.setText(check.tahunKeluaran)
-                        binding.tvDetailWarna.setText(check.warna)
-                        binding.tvDetailHarga.setText(check.harga)
-                        binding.tvDetailStock.setText(check.stock)
-                        binding.tvDetailMesin.setText(check.mesin)
-                        binding.tvDetailFirstData.setText(check.tipeSuspensi)
-                        binding.tvDetailSecondData.setText(check.tipeTransmisi)
-                        binding.btnJual.setText("Jual Motor")
-                    }
+                    motorSetupView(motor)
                 }
             }
 
@@ -90,19 +84,99 @@ class DetailDataActivity : AppCompatActivity() {
                 dialog.setView(inputEditTextField, 20,5,15,5)
                 dialog.show()
             }
-        }
 
-        binding.topAppBar.setNavigationOnClickListener {
-            val intent = Intent(this, MotorActivity::class.java)
-            startActivity(intent)
-            this.finish()
+            binding.topAppBar.setNavigationOnClickListener {
+                val intent = Intent(this, MotorActivity::class.java)
+                startActivity(intent)
+                this.finish()
+            }
+
+        }else{
+
+            CoroutineScope(Dispatchers.IO).launch {
+                mobil = mobilViewModel.getSpecificMotor(idIntent)
+                withContext(Dispatchers.Main) {
+                    mobilSetupView(mobil)
+                }
+            }
+
+            binding.btnJual.setOnClickListener {
+                val inputEditTextField = EditText(this)
+                val dialog = AlertDialog.Builder(this)
+                    .setTitle("Masukkan Jumlah Mobil Yang Terjual")
+                    .setMessage("Total :")
+                    .setView(inputEditTextField)
+                    .setPositiveButton("OK") { _, _ ->
+                        val editTextInput = inputEditTextField .text.toString()
+                        var total = mobil.stock.toInt() - editTextInput.toInt()
+                        mobilViewModel.update(total.toString(), mobil.id!!)
+                        val intent = Intent(this, MobilActivity::class.java)
+                        startActivity(intent)
+                        this.finish()
+                    }
+                    .setNegativeButton("Cancel", null)
+                    .create()
+                dialog.setView(inputEditTextField, 20,5,15,5)
+                dialog.show()
+            }
+
+            binding.floatingActionButton.setOnClickListener {
+                val inputEditTextField = EditText(this)
+                val dialog = AlertDialog.Builder(this)
+                    .setTitle("Menambahkan Jumlah Stock Mobil")
+                    .setMessage("Total :")
+                    .setView(inputEditTextField)
+                    .setPositiveButton("OK") { _, _ ->
+                        val editTextInput = inputEditTextField.text.toString()
+                        var total = editTextInput.toInt() + mobil.stock.toInt()
+                        mobilViewModel.update(total.toString(), mobil.id!!)
+                        val intent = Intent(this, MotorActivity::class.java)
+                        startActivity(intent)
+                        this.finish()
+                    }
+                    .setNegativeButton("Cancel", null)
+                    .create()
+                dialog.setView(inputEditTextField, 20,5,15,5)
+                dialog.show()
+            }
+
+            binding.topAppBar.setNavigationOnClickListener {
+                val intent = Intent(this, MobilActivity::class.java)
+                startActivity(intent)
+                this.finish()
+            }
+
         }
 
     }
+    private fun motorSetupView(motor: Motor){
+        binding.tvDetailTahunKeluaran.setText(motor.tahunKeluaran)
+        binding.tvDetailWarna.setText(motor.warna)
+        binding.tvDetailHarga.setText(motor.harga)
+        binding.tvDetailStock.setText(motor.stock)
+        binding.tvDetailMesin.setText(motor.mesin)
+        binding.tvDetailFirstData.setText(motor.tipeSuspensi)
+        binding.tvDetailSecondData.setText(motor.tipeTransmisi)
+        binding.btnJual.setText("Jual Motor")
+    }
 
-
-    private fun obtainMaiModel(activity: AppCompatActivity): MotorViewModel {
+    private fun mobilSetupView(mobil: Mobil){
+        binding.tvDetailTahunKeluaran.setText(mobil.tahunKeluaran)
+        binding.tvDetailWarna.setText(mobil.warna)
+        binding.tvDetailHarga.setText(mobil.harga)
+        binding.tvDetailStock.setText(mobil.stock)
+        binding.tvDetailMesin.setText(mobil.mesin)
+        binding.tvDetailFirstData.setText(mobil.kapasitasPenumpang)
+        binding.tvDetailSecondData.setText(mobil.tipe)
+        binding.btnJual.setText("Jual Mobil")
+    }
+    private fun obtainMotorViewModel(activity: AppCompatActivity): MotorViewModel {
         val factory = ViewModelFactory.getInstance(activity.application)
         return ViewModelProvider(activity, factory)[MotorViewModel::class.java]
+    }
+
+    private fun obtainMobilViewModel(activity: AppCompatActivity): MobilViewModel {
+        val factory = ViewModelFactory.getInstance(activity.application)
+        return ViewModelProvider(activity, factory)[MobilViewModel::class.java]
     }
 }

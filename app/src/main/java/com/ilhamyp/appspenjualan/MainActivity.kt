@@ -23,8 +23,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.mobilButton.setOnClickListener {
-            val intent = Intent(this, AddDataActivity::class.java)
-            intent.putExtra("info_type", "Mobil")
+            val intent = Intent(this, MobilActivity::class.java)
             startActivity(intent)
             this.finish()
         }
