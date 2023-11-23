@@ -8,5 +8,5 @@ import com.ilhamyp.appspenjualan.repository.MotorRepository
 
 class MainViewModel(application: Application) : ViewModel() {
     private val mMotorRepository: MotorRepository = MotorRepository(application)
-    fun getAllNotes(): LiveData<List<Motor>> = mMotorRepository.getAllNotes()
+    fun getAllMotor(): LiveData<List<Motor>> = mMotorRepository.getAllMotor()
 }

@@ -22,5 +22,5 @@ interface MotorDao {
     fun delete(motor: Motor)
 
     @Query("SELECT * from motor")
-    fun getAllNotes(): LiveData<List<Motor>>
+    fun getAllMotor(): LiveData<List<Motor>>
 }

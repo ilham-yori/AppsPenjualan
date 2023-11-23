@@ -17,7 +17,7 @@ class MotorRepository(application: Application) {
         val db = PenjualanRoomDatabases.getDatabase(application)
         mMotorDao = db.motorDao()
     }
-    fun getAllNotes(): LiveData<List<Motor>> = mMotorDao.getAllNotes()
+    fun getAllMotor(): LiveData<List<Motor>> = mMotorDao.getAllMotor()
 
     fun insert(motor: Motor) {
         executorService.execute { mMotorDao.insert(motor) }
