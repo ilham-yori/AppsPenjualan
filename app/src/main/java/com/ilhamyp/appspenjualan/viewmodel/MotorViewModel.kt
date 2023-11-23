@@ -12,12 +12,14 @@ class MotorViewModel(application: Application) : ViewModel() {
 
     fun getAllMotor(): LiveData<List<Motor>> = mMotorRepository.getAllMotor()
 
+    fun getSpecificMotor(search: Int): Motor = mMotorRepository.getSpecificMotor(search)
+
     fun insert(motor: Motor) {
         mMotorRepository.insert(motor)
     }
 
-    fun update(motor: Motor) {
-        mMotorRepository.update(motor)
+    fun update(stock: String, id: Int) {
+        mMotorRepository.update(stock,id)
     }
 
     fun delete(motor: Motor) {

@@ -3,12 +3,19 @@ package com.ilhamyp.appspenjualan
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.widget.EditText
+import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ilhamyp.appspenjualan.adapter.ListMotorAdapter
 import com.ilhamyp.appspenjualan.databinding.ActivityMotorBinding
 import com.ilhamyp.appspenjualan.model.Motor
 import com.ilhamyp.appspenjualan.viewmodel.MotorViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class MotorActivity : AppCompatActivity() {
 
@@ -33,12 +40,15 @@ class MotorActivity : AppCompatActivity() {
             }
         }
 
+
         adapter.notifyDataSetChanged()
 
         adapter.setOnItemClickCallback(object : ListMotorAdapter.OnItemClickCallback {
             override fun onItemClicked(data: Motor) {
-                val changeActivity = Intent(this@MotorActivity, MainActivity::class.java)
-                startActivity(changeActivity)
+                val intent = Intent(this@MotorActivity, DetailDataActivity::class.java)
+                intent.putExtra("detail_type","Motor")
+                intent.putExtra("data_kendaraan",data.id)
+                startActivity(intent)
             }
         })
 
@@ -60,4 +70,6 @@ class MotorActivity : AppCompatActivity() {
         val factory = ViewModelFactory.getInstance(activity.application)
         return ViewModelProvider(activity, factory)[MotorViewModel::class.java]
     }
+
+
 }

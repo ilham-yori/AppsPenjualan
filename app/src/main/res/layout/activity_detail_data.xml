@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DetailDataActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/topAppBar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:navigationIcon="@drawable/ic_back"
+            app:title="Detail Data" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <TextView
+        android:id="@+id/detailTahunKeluaran"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:text="Tahun Keluaran :"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout" />
+
+    <TextView
+        android:id="@+id/tvDetailTahunKeluaran"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:text="2007"
+        app:layout_constraintBottom_toBottomOf="@+id/detailTahunKeluaran"
+        app:layout_constraintStart_toEndOf="@+id/detailTahunKeluaran"
+        app:layout_constraintTop_toTopOf="@+id/detailTahunKeluaran" />
+
+    <TextView
+        android:id="@+id/detailWarna"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:layout_marginStart="16dp"
+        android:text="Warna :"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/detailTahunKeluaran" />
+
+    <TextView
+        android:id="@+id/tvDetailWarna"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Merah"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/detailWarna"
+        app:layout_constraintStart_toStartOf="@+id/tvDetailTahunKeluaran"
+        app:layout_constraintTop_toTopOf="@+id/detailWarna" />
+
+    <TextView
+        android:id="@+id/detailHarga"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:layout_marginStart="16dp"
+        android:text="Harga :"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/detailWarna" />
+
+    <TextView
+        android:id="@+id/tvDetailHarga"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2700"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/detailHarga"
+        app:layout_constraintStart_toStartOf="@+id/tvDetailWarna"
+        app:layout_constraintTop_toTopOf="@+id/detailHarga" />
+
+    <TextView
+        android:id="@+id/detailStock"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:layout_marginStart="16dp"
+        android:text="Stock :"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/detailHarga" />
+
+    <TextView
+        android:id="@+id/tvDetailStock"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="273"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/detailStock"
+        app:layout_constraintStart_toStartOf="@+id/tvDetailWarna"
+        app:layout_constraintTop_toTopOf="@+id/detailStock" />
+
+    <TextView
+        android:id="@+id/detailMesin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:layout_marginStart="16dp"
+        android:text="Mesin :"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/detailStock" />
+
+    <TextView
+        android:id="@+id/tvDetailMesin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Astrea Prima Rasa"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/detailMesin"
+        app:layout_constraintStart_toStartOf="@+id/tvDetailWarna"
+        app:layout_constraintTop_toTopOf="@+id/detailMesin" />
+
+    <TextView
+        android:id="@+id/detailFirstData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:layout_marginStart="16dp"
+        android:text="Tipe Suspensi :"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/detailMesin" />
+
+    <TextView
+        android:id="@+id/tvDetailFirstData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="BMW"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/detailFirstData"
+        app:layout_constraintStart_toStartOf="@+id/tvDetailWarna"
+        app:layout_constraintTop_toTopOf="@+id/detailFirstData" />
+
+    <TextView
+        android:id="@+id/detailSecondData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:layout_marginStart="16dp"
+        android:text="Tipe Transmisi :"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/detailFirstData" />
+
+    <TextView
+        android:id="@+id/tvDetailSecondData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Auto Semi Matic"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/detailSecondData"
+        app:layout_constraintStart_toStartOf="@+id/tvDetailWarna"
+        app:layout_constraintTop_toTopOf="@+id/detailSecondData" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="16dp"
+        android:clickable="true"
+        android:src="@android:drawable/ic_input_add"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:importantForAccessibility="no" />
+
+    <Button
+        android:id="@+id/btnJual"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/jual"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/appBarLayout" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

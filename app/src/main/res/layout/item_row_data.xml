@@ -23,7 +23,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="12sp"
-            android:text="Tahun Keluaran: "
+            android:text="Tahun Keluaran :"
             card_view:layout_constraintStart_toStartOf="parent"
             card_view:layout_constraintTop_toTopOf="parent" />
 
@@ -45,7 +45,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:textSize="16sp"
-            android:text="Mesin: "
+            android:text="Mesin : "
             card_view:layout_constraintStart_toStartOf="parent"
             card_view:layout_constraintTop_toBottomOf="@id/tahunKeluaran" />
 
@@ -53,11 +53,10 @@
             android:id="@+id/tv_Mesin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:textSize="16sp"
             android:text="Astrea Prima Rasa"
+            android:textSize="16sp"
             card_view:layout_constraintBottom_toBottomOf="@+id/mesin"
-            card_view:layout_constraintStart_toEndOf="@+id/mesin"
+            card_view:layout_constraintStart_toStartOf="@+id/tv_tahunKeluaran"
             card_view:layout_constraintTop_toTopOf="@+id/mesin" />
 
         <TextView
@@ -66,7 +65,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:textSize="12sp"
-            android:text="Warna: "
+            android:text="Warna : "
             card_view:layout_constraintStart_toStartOf="parent"
             card_view:layout_constraintTop_toBottomOf="@id/mesin" />
 
@@ -74,19 +73,18 @@
             android:id="@+id/tv_Warna"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:text="Merah"
             android:textSize="12sp"
             android:textStyle="bold"
-            android:text="Merah"
             card_view:layout_constraintBottom_toBottomOf="@+id/warna"
-            card_view:layout_constraintStart_toEndOf="@+id/warna"
+            card_view:layout_constraintStart_toStartOf="@+id/tv_Mesin"
             card_view:layout_constraintTop_toTopOf="@+id/warna" />
 
         <TextView
             android:id="@+id/stock"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Stock: "
+            android:text="Stock : "
             android:textSize="16sp"
             android:layout_marginEnd="16dp"
             android:textStyle="bold"

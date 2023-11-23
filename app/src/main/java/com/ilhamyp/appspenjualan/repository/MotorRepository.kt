@@ -19,13 +19,15 @@ class MotorRepository(application: Application) {
     }
     fun getAllMotor(): LiveData<List<Motor>> = mMotorDao.getAllMotor()
 
+    fun getSpecificMotor(search: Int) : Motor = mMotorDao.getSpecificMotor(search)
+
     fun insert(motor: Motor) {
         executorService.execute { mMotorDao.insert(motor) }
     }
     fun delete(motor: Motor) {
         executorService.execute { mMotorDao.delete(motor) }
     }
-    fun update(motor: Motor) {
-        executorService.execute { mMotorDao.update(motor) }
+    fun update(stock: String, id: Int) {
+        executorService.execute { mMotorDao.update(stock, id) }
     }
 }
