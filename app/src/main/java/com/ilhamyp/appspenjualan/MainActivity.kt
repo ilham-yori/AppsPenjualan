@@ -1,7 +1,11 @@
 package com.ilhamyp.appspenjualan
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import androidx.fragment.app.Fragment
 import com.ilhamyp.appspenjualan.databinding.ActivityMainBinding
 
@@ -24,6 +28,21 @@ class MainActivity : AppCompatActivity() {
                 }
             }
             true
+        }
+
+        binding.topAppBar.setOnMenuItemClickListener {
+            when(it.itemId){
+                R.id.add_motor -> {
+                    val intent = Intent(this, AddMotorActivity::class.java)
+                    startActivity(intent)
+                    true
+                }
+
+                else -> {
+                    false
+
+                }
+            }
         }
     }
 
