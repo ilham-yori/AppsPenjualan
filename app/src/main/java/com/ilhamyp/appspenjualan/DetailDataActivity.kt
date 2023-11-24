@@ -35,9 +35,10 @@ class DetailDataActivity : AppCompatActivity() {
 
         val typeIntent = intent.getStringExtra("detail_type")
         val idIntent = intent.getIntExtra("data_kendaraan",0)
-        motorViewModel = obtainMotorViewModel(this@DetailDataActivity)
-        mobilViewModel = obtainMobilViewModel(this@DetailDataActivity)
-        historyViewModel = obtainHistoryViewModel(this@DetailDataActivity)
+
+        motorViewModel = ObtainViewModel.getMotorViewModel(this@DetailDataActivity)
+        mobilViewModel = ObtainViewModel.getMobilViewModel(this@DetailDataActivity)
+        historyViewModel = ObtainViewModel.getHistoryViewModel(this@DetailDataActivity)
 
         if(typeIntent == "Motor"){
 
@@ -192,19 +193,5 @@ class DetailDataActivity : AppCompatActivity() {
         binding.tvDetailFirstData.setText(mobil.kapasitasPenumpang)
         binding.tvDetailSecondData.setText(mobil.tipe)
         binding.btnJual.setText("Jual Mobil")
-    }
-    private fun obtainMotorViewModel(activity: AppCompatActivity): MotorViewModel {
-        val factory = ViewModelFactory.getInstance(activity.application)
-        return ViewModelProvider(activity, factory)[MotorViewModel::class.java]
-    }
-
-    private fun obtainMobilViewModel(activity: AppCompatActivity): MobilViewModel {
-        val factory = ViewModelFactory.getInstance(activity.application)
-        return ViewModelProvider(activity, factory)[MobilViewModel::class.java]
-    }
-
-    private fun obtainHistoryViewModel(activity: AppCompatActivity): HistoryViewModel {
-        val factory = ViewModelFactory.getInstance(activity.application)
-        return ViewModelProvider(activity, factory)[HistoryViewModel::class.java]
     }
 }

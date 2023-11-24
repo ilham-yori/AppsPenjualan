@@ -26,13 +26,12 @@ class MotorActivity : AppCompatActivity() {
         binding?.rvMotor?.setHasFixedSize(true)
         binding?.rvMotor?.adapter = adapter
 
-        motorViewModel = obtainMotorViewModel(this@MotorActivity)
+        motorViewModel = ObtainViewModel.getMotorViewModel(this@MotorActivity)
         motorViewModel.getAllMotor().observe(this){ motorList ->
             if (motorList != null) {
                 adapter.loadListUser(motorList)
             }
         }
-
 
         adapter.notifyDataSetChanged()
 
@@ -58,11 +57,4 @@ class MotorActivity : AppCompatActivity() {
             this.finish()
         }
     }
-
-    private fun obtainMotorViewModel(activity: AppCompatActivity): MotorViewModel {
-        val factory = ViewModelFactory.getInstance(activity.application)
-        return ViewModelProvider(activity, factory)[MotorViewModel::class.java]
-    }
-
-
 }

@@ -95,6 +95,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="@+id/guidelineHorizontal"
+        android:nestedScrollingEnabled="true"
         tools:listitem="@layout/item_row_data"/>
 
 

@@ -21,19 +21,19 @@ class HistoryActivity : AppCompatActivity() {
     private lateinit var historyViewModel: HistoryViewModel
     private lateinit var adapter: ListHistoryAdapter
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityHistoryBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        historyViewModel = obtainHistoryViewModel(this@HistoryActivity)
+        historyViewModel = ObtainViewModel.getHistoryViewModel(this@HistoryActivity)
 
         adapter = ListHistoryAdapter()
         binding?.rvHistory?.layoutManager = LinearLayoutManager(this)
         binding?.rvHistory?.setHasFixedSize(true)
         binding?.rvHistory?.adapter = adapter
 
-        historyViewModel = obtainHistoryViewModel(this@HistoryActivity)
         historyViewModel.getAllHistory().observe(this){ historyList ->
             if (historyList != null) {
                 adapter.loadListUser(historyList)
@@ -57,11 +57,5 @@ class HistoryActivity : AppCompatActivity() {
             this.finish()
         }
 
-
-    }
-
-    private fun obtainHistoryViewModel(activity: AppCompatActivity): HistoryViewModel {
-        val factory = ViewModelFactory.getInstance(activity.application)
-        return ViewModelProvider(activity, factory)[HistoryViewModel::class.java]
     }
 }

@@ -26,13 +26,12 @@ class MobilActivity : AppCompatActivity() {
         binding?.rvMobil?.setHasFixedSize(true)
         binding?.rvMobil?.adapter = adapter
 
-        mobilViewModel = obtainMobilViewModel(this@MobilActivity)
+        mobilViewModel = ObtainViewModel.getMobilViewModel(this@MobilActivity)
         mobilViewModel.getAllMobil().observe(this){ mobilList ->
             if (mobilList != null) {
                 adapter.loadListUser(mobilList)
             }
         }
-
 
         adapter.notifyDataSetChanged()
 
@@ -57,10 +56,5 @@ class MobilActivity : AppCompatActivity() {
             startActivity(intent)
             this.finish()
         }
-    }
-
-    private fun obtainMobilViewModel(activity: AppCompatActivity): MobilViewModel {
-        val factory = ViewModelFactory.getInstance(activity.application)
-        return ViewModelProvider(activity, factory)[MobilViewModel::class.java]
     }
 }

@@ -24,7 +24,7 @@ class AddDataActivity : AppCompatActivity() {
         val typeIntent = intent.getStringExtra("info_type")
 
         if (typeIntent == "Motor"){
-            motorViewModel = obtainMotorViewModel(this@AddDataActivity)
+            motorViewModel = ObtainViewModel.getMotorViewModel(this@AddDataActivity)
             binding.addDataButton.setOnClickListener {
 
                 motorViewModel.insertMotor(Motor(null,
@@ -49,7 +49,7 @@ class AddDataActivity : AppCompatActivity() {
             }
         }else{
             mobilViewSetup()
-            mobilViewModel = obtainMobilViewModel(this@AddDataActivity)
+            mobilViewModel = ObtainViewModel.getMobilViewModel(this@AddDataActivity)
 
             binding.addDataButton.setOnClickListener {
                 mobilViewModel.insertMobil(Mobil(null,
@@ -76,17 +76,6 @@ class AddDataActivity : AppCompatActivity() {
         }
 
     }
-
-    private fun obtainMotorViewModel(activity: AppCompatActivity): MotorViewModel {
-        val factory = ViewModelFactory.getInstance(activity.application)
-        return ViewModelProvider(activity, factory)[MotorViewModel::class.java]
-    }
-
-    private fun obtainMobilViewModel(activity: AppCompatActivity): MobilViewModel {
-        val factory = ViewModelFactory.getInstance(activity.application)
-        return ViewModelProvider(activity, factory)[MobilViewModel::class.java]
-    }
-
     private fun mobilViewSetup(){
         binding.topAppBar.title = "Form Penambahan Data Mobil"
         binding.firstDataTextInputLayout.setHint(R.string.kapasitas_penumpang)
