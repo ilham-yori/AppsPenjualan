@@ -3,13 +3,14 @@ package com.ilhamyp.appspenjualan
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.ViewModelProvider
 import com.ilhamyp.appspenjualan.databinding.ActivityDetailDataBinding
+import com.ilhamyp.appspenjualan.model.History
 import com.ilhamyp.appspenjualan.model.Mobil
 import com.ilhamyp.appspenjualan.model.Motor
+import com.ilhamyp.appspenjualan.viewmodel.HistoryViewModel
 import com.ilhamyp.appspenjualan.viewmodel.MobilViewModel
 import com.ilhamyp.appspenjualan.viewmodel.MotorViewModel
 import kotlinx.coroutines.CoroutineScope
@@ -22,6 +23,7 @@ class DetailDataActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailDataBinding
     private lateinit var motorViewModel: MotorViewModel
     private lateinit var mobilViewModel: MobilViewModel
+    private lateinit var historyViewModel: HistoryViewModel
     private lateinit var motor: Motor
     private lateinit var mobil: Mobil
 
@@ -35,6 +37,7 @@ class DetailDataActivity : AppCompatActivity() {
         val idIntent = intent.getIntExtra("data_kendaraan",0)
         motorViewModel = obtainMotorViewModel(this@DetailDataActivity)
         mobilViewModel = obtainMobilViewModel(this@DetailDataActivity)
+        historyViewModel = obtainHistoryViewModel(this@DetailDataActivity)
 
         if(typeIntent == "Motor"){
 
@@ -54,7 +57,17 @@ class DetailDataActivity : AppCompatActivity() {
                     .setPositiveButton("OK") { _, _ ->
                         val editTextInput = inputEditTextField .text.toString()
                         var total = motor.stock.toInt() - editTextInput.toInt()
-                        motorViewModel.update(total.toString(), motor.id!!)
+                        motorViewModel.updateStockMotor(total.toString(), motor.id!!)
+
+                        historyViewModel.insertHistory(History(
+                            null,
+                            motor.tahunKeluaran,
+                            motor.mesin,
+                            typeIntent,
+                            editTextInput,
+                            DateHelper.getCurrentDate()
+                        ))
+
                         val intent = Intent(this, MotorActivity::class.java)
                         startActivity(intent)
                         this.finish()
@@ -74,7 +87,7 @@ class DetailDataActivity : AppCompatActivity() {
                     .setPositiveButton("OK") { _, _ ->
                         val editTextInput = inputEditTextField.text.toString()
                         var total = editTextInput.toInt() + motor.stock.toInt()
-                        motorViewModel.update(total.toString(), motor.id!!)
+                        motorViewModel.updateStockMotor(total.toString(), motor.id!!)
                         val intent = Intent(this, MotorActivity::class.java)
                         startActivity(intent)
                         this.finish()
@@ -94,7 +107,7 @@ class DetailDataActivity : AppCompatActivity() {
         }else{
 
             CoroutineScope(Dispatchers.IO).launch {
-                mobil = mobilViewModel.getSpecificMotor(idIntent)
+                mobil = mobilViewModel.getSpecificMobil(idIntent)
                 withContext(Dispatchers.Main) {
                     mobilSetupView(mobil)
                 }
@@ -109,7 +122,17 @@ class DetailDataActivity : AppCompatActivity() {
                     .setPositiveButton("OK") { _, _ ->
                         val editTextInput = inputEditTextField .text.toString()
                         var total = mobil.stock.toInt() - editTextInput.toInt()
-                        mobilViewModel.update(total.toString(), mobil.id!!)
+                        mobilViewModel.updateStockMobil(total.toString(), mobil.id!!)
+
+                        historyViewModel.insertHistory(History(
+                            null,
+                            mobil.tahunKeluaran,
+                            mobil.mesin,
+                            typeIntent!!,
+                            editTextInput,
+                            DateHelper.getCurrentDate()
+                        ))
+
                         val intent = Intent(this, MobilActivity::class.java)
                         startActivity(intent)
                         this.finish()
@@ -129,7 +152,7 @@ class DetailDataActivity : AppCompatActivity() {
                     .setPositiveButton("OK") { _, _ ->
                         val editTextInput = inputEditTextField.text.toString()
                         var total = editTextInput.toInt() + mobil.stock.toInt()
-                        mobilViewModel.update(total.toString(), mobil.id!!)
+                        mobilViewModel.updateStockMobil(total.toString(), mobil.id!!)
                         val intent = Intent(this, MotorActivity::class.java)
                         startActivity(intent)
                         this.finish()
@@ -178,5 +201,10 @@ class DetailDataActivity : AppCompatActivity() {
     private fun obtainMobilViewModel(activity: AppCompatActivity): MobilViewModel {
         val factory = ViewModelFactory.getInstance(activity.application)
         return ViewModelProvider(activity, factory)[MobilViewModel::class.java]
+    }
+
+    private fun obtainHistoryViewModel(activity: AppCompatActivity): HistoryViewModel {
+        val factory = ViewModelFactory.getInstance(activity.application)
+        return ViewModelProvider(activity, factory)[HistoryViewModel::class.java]
     }
 }

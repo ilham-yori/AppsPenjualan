@@ -6,13 +6,9 @@ import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ilhamyp.appspenjualan.adapter.ListMobilAdapater
-import com.ilhamyp.appspenjualan.adapter.ListMotorAdapter
 import com.ilhamyp.appspenjualan.databinding.ActivityMobilBinding
-import com.ilhamyp.appspenjualan.databinding.ActivityMotorBinding
 import com.ilhamyp.appspenjualan.model.Mobil
-import com.ilhamyp.appspenjualan.model.Motor
 import com.ilhamyp.appspenjualan.viewmodel.MobilViewModel
-import com.ilhamyp.appspenjualan.viewmodel.MotorViewModel
 
 class MobilActivity : AppCompatActivity() {
 
@@ -30,7 +26,7 @@ class MobilActivity : AppCompatActivity() {
         binding?.rvMobil?.setHasFixedSize(true)
         binding?.rvMobil?.adapter = adapter
 
-        mobilViewModel = obtainMaiModel(this@MobilActivity)
+        mobilViewModel = obtainMobilViewModel(this@MobilActivity)
         mobilViewModel.getAllMobil().observe(this){ mobilList ->
             if (mobilList != null) {
                 adapter.loadListUser(mobilList)
@@ -63,7 +59,7 @@ class MobilActivity : AppCompatActivity() {
         }
     }
 
-    private fun obtainMaiModel(activity: AppCompatActivity): MobilViewModel {
+    private fun obtainMobilViewModel(activity: AppCompatActivity): MobilViewModel {
         val factory = ViewModelFactory.getInstance(activity.application)
         return ViewModelProvider(activity, factory)[MobilViewModel::class.java]
     }

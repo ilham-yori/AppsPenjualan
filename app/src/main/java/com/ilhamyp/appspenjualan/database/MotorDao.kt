@@ -6,20 +6,19 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import androidx.room.Update
 import com.ilhamyp.appspenjualan.model.Motor
 
 
 @Dao
 interface MotorDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    fun insert(motor: Motor)
+    fun insertMotor(motor: Motor)
 
     @Query("UPDATE motor SET stock = :stock WHERE motor.id = :id")
-    fun update(stock : String, id : Int)
+    fun updateStockMotor(stock : String, id : Int)
 
     @Delete
-    fun delete(motor: Motor)
+    fun deleteMotor(motor: Motor)
 
     @Query("SELECT * from motor")
     fun getAllMotor(): LiveData<List<Motor>>

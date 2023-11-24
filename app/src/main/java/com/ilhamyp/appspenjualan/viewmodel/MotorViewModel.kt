@@ -14,15 +14,15 @@ class MotorViewModel(application: Application) : ViewModel() {
 
     fun getSpecificMotor(search: Int): Motor = mMotorRepository.getSpecificMotor(search)
 
-    fun insert(motor: Motor) {
-        mMotorRepository.insert(motor)
+    fun insertMotor(motor: Motor) {
+        mMotorRepository.insertMotor(motor)
     }
 
-    fun update(stock: String, id: Int) {
-        mMotorRepository.update(stock,id)
+    fun updateStockMotor(stock: String, id: Int) {
+        mMotorRepository.updateStockMotor(stock,id)
     }
 
-    fun delete(motor: Motor) {
-        mMotorRepository.delete(motor)
+    fun deleteMotor(motor: Motor) {
+        mMotorRepository.deleteMotor(motor)
     }
 }

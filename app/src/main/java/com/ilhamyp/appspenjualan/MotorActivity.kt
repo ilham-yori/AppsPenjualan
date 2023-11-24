@@ -3,19 +3,12 @@ package com.ilhamyp.appspenjualan
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.widget.EditText
-import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ilhamyp.appspenjualan.adapter.ListMotorAdapter
 import com.ilhamyp.appspenjualan.databinding.ActivityMotorBinding
 import com.ilhamyp.appspenjualan.model.Motor
 import com.ilhamyp.appspenjualan.viewmodel.MotorViewModel
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class MotorActivity : AppCompatActivity() {
 
@@ -33,7 +26,7 @@ class MotorActivity : AppCompatActivity() {
         binding?.rvMotor?.setHasFixedSize(true)
         binding?.rvMotor?.adapter = adapter
 
-        motorViewModel = obtainMaiModel(this@MotorActivity)
+        motorViewModel = obtainMotorViewModel(this@MotorActivity)
         motorViewModel.getAllMotor().observe(this){ motorList ->
             if (motorList != null) {
                 adapter.loadListUser(motorList)
@@ -66,7 +59,7 @@ class MotorActivity : AppCompatActivity() {
         }
     }
 
-    private fun obtainMaiModel(activity: AppCompatActivity): MotorViewModel {
+    private fun obtainMotorViewModel(activity: AppCompatActivity): MotorViewModel {
         val factory = ViewModelFactory.getInstance(activity.application)
         return ViewModelProvider(activity, factory)[MotorViewModel::class.java]
     }

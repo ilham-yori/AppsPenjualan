@@ -4,9 +4,7 @@ import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.ilhamyp.appspenjualan.model.Mobil
-import com.ilhamyp.appspenjualan.model.Motor
 import com.ilhamyp.appspenjualan.repository.MobilRepository
-import com.ilhamyp.appspenjualan.repository.MotorRepository
 
 class MobilViewModel(application: Application) : ViewModel() {
 
@@ -14,17 +12,17 @@ class MobilViewModel(application: Application) : ViewModel() {
 
     fun getAllMobil(): LiveData<List<Mobil>> = mMobilRepository.getAllMobil()
 
-    fun getSpecificMotor(search: Int): Mobil = mMobilRepository.getSpecificMotor(search)
+    fun getSpecificMobil(search: Int): Mobil = mMobilRepository.getSpecificMobil(search)
 
-    fun insert(mobil: Mobil) {
-        mMobilRepository.insert(mobil)
+    fun insertMobil(mobil: Mobil) {
+        mMobilRepository.insertMobil(mobil)
     }
 
-    fun update(stock: String, id: Int) {
-        mMobilRepository.update(stock,id)
+    fun updateStockMobil(stock: String, id: Int) {
+        mMobilRepository.updateStockMobil(stock,id)
     }
 
-    fun delete(mobil: Mobil) {
-        mMobilRepository.delete(mobil)
+    fun deleteMobil(mobil: Mobil) {
+        mMobilRepository.deleteMobil(mobil)
     }
 }

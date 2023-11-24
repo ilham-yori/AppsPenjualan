@@ -3,6 +3,7 @@ package com.ilhamyp.appspenjualan
 import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.ilhamyp.appspenjualan.viewmodel.HistoryViewModel
 import com.ilhamyp.appspenjualan.viewmodel.MobilViewModel
 import com.ilhamyp.appspenjualan.viewmodel.MotorViewModel
 
@@ -27,6 +28,8 @@ class ViewModelFactory private constructor(private val mApplication: Application
             return MobilViewModel(mApplication) as T
         } else if (modelClass.isAssignableFrom(MotorViewModel::class.java)) {
             return MotorViewModel(mApplication) as T
+        } else if (modelClass.isAssignableFrom(HistoryViewModel::class.java)) {
+            return HistoryViewModel(mApplication) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
     }

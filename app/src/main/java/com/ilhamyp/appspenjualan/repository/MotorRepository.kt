@@ -21,13 +21,13 @@ class MotorRepository(application: Application) {
 
     fun getSpecificMotor(search: Int) : Motor = mMotorDao.getSpecificMotor(search)
 
-    fun insert(motor: Motor) {
-        executorService.execute { mMotorDao.insert(motor) }
+    fun insertMotor(motor: Motor) {
+        executorService.execute { mMotorDao.insertMotor(motor) }
     }
-    fun delete(motor: Motor) {
-        executorService.execute { mMotorDao.delete(motor) }
+    fun deleteMotor(motor: Motor) {
+        executorService.execute { mMotorDao.deleteMotor(motor) }
     }
-    fun update(stock: String, id: Int) {
-        executorService.execute { mMotorDao.update(stock, id) }
+    fun updateStockMotor(stock: String, id: Int) {
+        executorService.execute { mMotorDao.updateStockMotor(stock, id) }
     }
 }

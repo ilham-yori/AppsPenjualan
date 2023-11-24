@@ -4,14 +4,16 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.ilhamyp.appspenjualan.model.History
 import com.ilhamyp.appspenjualan.model.Mobil
 import com.ilhamyp.appspenjualan.model.Motor
 
-@Database(entities = [Motor::class,Mobil::class], version = 2)
+@Database(entities = [Motor::class,Mobil::class,History::class], version = 1)
 abstract class PenjualanRoomDatabases : RoomDatabase() {
 
     abstract fun motorDao(): MotorDao
     abstract fun mobilDao(): MobilDao
+    abstract fun historyDao(): HistoryDao
 
     companion object {
         @Volatile

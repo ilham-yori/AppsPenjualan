@@ -29,7 +29,9 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.historyButton.setOnClickListener {
-
+            val intent = Intent(this, HistoryActivity::class.java)
+            startActivity(intent)
+            this.finish()
         }
     }
 }

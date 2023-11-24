@@ -27,7 +27,7 @@ class AddDataActivity : AppCompatActivity() {
             motorViewModel = obtainMotorViewModel(this@AddDataActivity)
             binding.addDataButton.setOnClickListener {
 
-                motorViewModel.insert(Motor(null,
+                motorViewModel.insertMotor(Motor(null,
                     binding.tahunKendaranEditText.text.toString(),
                     binding.warnaEditText.text.toString(),
                     binding.hargaEditText.text.toString(),
@@ -52,7 +52,7 @@ class AddDataActivity : AppCompatActivity() {
             mobilViewModel = obtainMobilViewModel(this@AddDataActivity)
 
             binding.addDataButton.setOnClickListener {
-                mobilViewModel.insert(Mobil(null,
+                mobilViewModel.insertMobil(Mobil(null,
                     binding.tahunKendaranEditText.text.toString(),
                     binding.warnaEditText.text.toString(),
                     binding.hargaEditText.text.toString(),
