@@ -104,6 +104,17 @@ class DetailDataActivity : AppCompatActivity() {
                 this.finish()
             }
 
+            binding.topAppBar.setOnMenuItemClickListener {
+                when(it.itemId){
+                    R.id.btnDelete -> {
+                        motorViewModel.deleteMotor(motor)
+                        val intent = Intent(this, MotorActivity::class.java)
+                        startActivity(intent)
+                        true
+                    } else -> false
+                }
+            }
+
         }else{
 
             CoroutineScope(Dispatchers.IO).launch {
@@ -167,6 +178,17 @@ class DetailDataActivity : AppCompatActivity() {
                 val intent = Intent(this, MobilActivity::class.java)
                 startActivity(intent)
                 this.finish()
+            }
+
+            binding.topAppBar.setOnMenuItemClickListener {
+                when(it.itemId){
+                    R.id.btnDelete -> {
+                        mobilViewModel.deleteMobil(mobil)
+                        val intent = Intent(this, MobilActivity::class.java)
+                        startActivity(intent)
+                        true
+                    } else -> false
+                }
             }
 
         }

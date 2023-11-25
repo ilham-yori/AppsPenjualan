@@ -31,8 +31,6 @@ class MobilActivity : AppCompatActivity() {
             }
         }
 
-        adapter.notifyDataSetChanged()
-
         adapter.setOnItemClickCallback(object : ListMobilAdapater.OnItemClickCallback {
             override fun onItemClicked(data: Mobil) {
                 val intent = Intent(this@MobilActivity, DetailDataActivity::class.java)

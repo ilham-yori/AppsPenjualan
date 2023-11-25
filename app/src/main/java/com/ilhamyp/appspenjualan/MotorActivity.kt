@@ -31,8 +31,6 @@ class MotorActivity : AppCompatActivity() {
             }
         }
 
-        adapter.notifyDataSetChanged()
-
         adapter.setOnItemClickCallback(object : ListMotorAdapter.OnItemClickCallback {
             override fun onItemClicked(data: Motor) {
                 val intent = Intent(this@MotorActivity, DetailDataActivity::class.java)

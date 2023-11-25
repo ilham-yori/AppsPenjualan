@@ -36,8 +36,6 @@ class HistoryActivity : AppCompatActivity() {
             }
         }
 
-        adapter.notifyDataSetChanged()
-
         CoroutineScope(Dispatchers.IO).launch {
             val totalMotor = historyViewModel.countPenjualan("Motor")
             val totalMobil = historyViewModel.countPenjualan("Mobil")
