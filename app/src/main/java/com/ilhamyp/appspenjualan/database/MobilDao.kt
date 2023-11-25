@@ -1,6 +1,6 @@
 package com.ilhamyp.appspenjualan.database
 
-import androidx.lifecycle.LiveData
+import androidx.paging.DataSource
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
@@ -20,8 +20,8 @@ interface MobilDao {
     @Delete
     fun deleteMobil(mobil: Mobil)
 
-    @Query("SELECT * from mobil")
-    fun getAllMobil(): LiveData<List<Mobil>>
+    @Query("SELECT * from mobil ORDER BY id ASC")
+    fun getAllMobil(): DataSource.Factory<Int, Mobil>
 
     @Query("SELECT * from mobil WHERE mobil.id = :search")
     fun getSpecificMobil(search : Int): Mobil

@@ -3,12 +3,9 @@ package com.ilhamyp.appspenjualan
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ilhamyp.appspenjualan.adapter.ListHistoryAdapter
-import com.ilhamyp.appspenjualan.adapter.ListMobilAdapater
 import com.ilhamyp.appspenjualan.databinding.ActivityHistoryBinding
-import com.ilhamyp.appspenjualan.databinding.ActivityMainBinding
 import com.ilhamyp.appspenjualan.viewmodel.HistoryViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -31,12 +28,11 @@ class HistoryActivity : AppCompatActivity() {
 
         adapter = ListHistoryAdapter()
         binding?.rvHistory?.layoutManager = LinearLayoutManager(this)
-        binding?.rvHistory?.setHasFixedSize(true)
         binding?.rvHistory?.adapter = adapter
 
         historyViewModel.getAllHistory().observe(this){ historyList ->
             if (historyList != null) {
-                adapter.loadListUser(historyList)
+                adapter.submitList(historyList)
             }
         }
 

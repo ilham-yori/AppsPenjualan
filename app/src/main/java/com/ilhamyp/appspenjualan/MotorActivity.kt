@@ -3,7 +3,6 @@ package com.ilhamyp.appspenjualan
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ilhamyp.appspenjualan.adapter.ListMotorAdapter
 import com.ilhamyp.appspenjualan.databinding.ActivityMotorBinding
@@ -23,13 +22,12 @@ class MotorActivity : AppCompatActivity() {
 
         adapter = ListMotorAdapter()
         binding?.rvMotor?.layoutManager = LinearLayoutManager(this)
-        binding?.rvMotor?.setHasFixedSize(true)
         binding?.rvMotor?.adapter = adapter
 
         motorViewModel = ObtainViewModel.getMotorViewModel(this@MotorActivity)
         motorViewModel.getAllMotor().observe(this){ motorList ->
             if (motorList != null) {
-                adapter.loadListUser(motorList)
+                adapter.submitList(motorList)
             }
         }
 

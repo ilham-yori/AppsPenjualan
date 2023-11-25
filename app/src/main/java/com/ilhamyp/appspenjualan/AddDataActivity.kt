@@ -3,7 +3,6 @@ package com.ilhamyp.appspenjualan
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.lifecycle.ViewModelProvider
 import com.ilhamyp.appspenjualan.databinding.ActivityAddDataBinding
 import com.ilhamyp.appspenjualan.model.Mobil
 import com.ilhamyp.appspenjualan.model.Motor

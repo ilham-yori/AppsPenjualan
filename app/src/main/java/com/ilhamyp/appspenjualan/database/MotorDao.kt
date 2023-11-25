@@ -1,6 +1,6 @@
 package com.ilhamyp.appspenjualan.database
 
-import androidx.lifecycle.LiveData
+import androidx.paging.DataSource
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
@@ -20,8 +20,8 @@ interface MotorDao {
     @Delete
     fun deleteMotor(motor: Motor)
 
-    @Query("SELECT * from motor")
-    fun getAllMotor(): LiveData<List<Motor>>
+    @Query("SELECT * from motor ORDER BY id ASC")
+    fun getAllMotor(): DataSource.Factory<Int, Motor>
 
     @Query("SELECT * from motor WHERE motor.id = :search")
     fun getSpecificMotor(search : Int): Motor

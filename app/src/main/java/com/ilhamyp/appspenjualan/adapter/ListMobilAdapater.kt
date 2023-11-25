@@ -2,15 +2,15 @@ package com.ilhamyp.appspenjualan.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.paging.PagedListAdapter
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.ilhamyp.appspenjualan.databinding.ItemRowDataBinding
 import com.ilhamyp.appspenjualan.model.Mobil
-import com.ilhamyp.appspenjualan.model.Motor
 
-class ListMobilAdapater() : RecyclerView.Adapter<ListMobilAdapater.ListViewHolder>() {
+class ListMobilAdapater() : PagedListAdapter<Mobil, ListMobilAdapater.ListViewHolder>(MobilComparator()) {
 
     private lateinit var onItemClickCallback: OnItemClickCallback
-    private val list = ArrayList<Mobil>()
 
     inner class ListViewHolder(val binding : ItemRowDataBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(mobil : Mobil) {
@@ -28,7 +28,8 @@ class ListMobilAdapater() : RecyclerView.Adapter<ListMobilAdapater.ListViewHolde
     }
 
     override fun onBindViewHolder(holder: ListMobilAdapater.ListViewHolder, position: Int) {
-        holder.bind(list[position])
+        val mobil = getItem(position) as Mobil
+        holder.bind(mobil)
     }
 
     fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
@@ -40,15 +41,18 @@ class ListMobilAdapater() : RecyclerView.Adapter<ListMobilAdapater.ListViewHolde
         return ListViewHolder((view))
     }
 
-    override fun getItemCount() : Int  = list.size
-
     interface OnItemClickCallback {
         fun onItemClicked(data: Mobil)
     }
 
-    fun loadListUser(mobil: List<Mobil>) {
-        list.clear()
-        list.addAll(mobil)
-        notifyDataSetChanged()
+    class MobilComparator : DiffUtil.ItemCallback<Mobil>() {
+        override fun areItemsTheSame(oldItem: Mobil, newItem: Mobil): Boolean {
+            return oldItem === newItem
+        }
+
+        override fun areContentsTheSame(oldItem: Mobil, newItem: Mobil): Boolean {
+            return oldItem.id == newItem.id
+        }
     }
+
 }

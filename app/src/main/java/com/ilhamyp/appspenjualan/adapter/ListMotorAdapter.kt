@@ -2,14 +2,15 @@ package com.ilhamyp.appspenjualan.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.paging.PagedListAdapter
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.ilhamyp.appspenjualan.databinding.ItemRowDataBinding
 import com.ilhamyp.appspenjualan.model.Motor
 
-class ListMotorAdapter () : RecyclerView.Adapter<ListMotorAdapter.ListViewHolder>() {
+class ListMotorAdapter () : PagedListAdapter<Motor, ListMotorAdapter.ListViewHolder>(MotorComparator()) {
 
     private lateinit var onItemClickCallback: OnItemClickCallback
-    private val list = ArrayList<Motor>()
 
     inner class ListViewHolder(val binding : ItemRowDataBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(motor : Motor) {
@@ -27,7 +28,8 @@ class ListMotorAdapter () : RecyclerView.Adapter<ListMotorAdapter.ListViewHolder
     }
 
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
-        holder.bind(list[position])
+        val motor = getItem(position) as Motor
+        holder.bind(motor)
     }
 
     fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
@@ -39,15 +41,17 @@ class ListMotorAdapter () : RecyclerView.Adapter<ListMotorAdapter.ListViewHolder
         return ListViewHolder((view))
     }
 
-    override fun getItemCount() : Int  = list.size
-
     interface OnItemClickCallback {
         fun onItemClicked(data: Motor)
     }
 
-    fun loadListUser(motor: List<Motor>) {
-        list.clear()
-        list.addAll(motor)
-        notifyDataSetChanged()
+    class MotorComparator : DiffUtil.ItemCallback<Motor>() {
+        override fun areItemsTheSame(oldItem: Motor, newItem: Motor): Boolean {
+            return oldItem === newItem
+        }
+
+        override fun areContentsTheSame(oldItem: Motor, newItem: Motor): Boolean {
+            return oldItem.id == newItem.id
+        }
     }
 }

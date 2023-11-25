@@ -2,14 +2,13 @@ package com.ilhamyp.appspenjualan.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.paging.PagedListAdapter
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.ilhamyp.appspenjualan.databinding.ItemRowDataBinding
 import com.ilhamyp.appspenjualan.model.History
-import com.ilhamyp.appspenjualan.model.Mobil
 
-class ListHistoryAdapter() : RecyclerView.Adapter<ListHistoryAdapter.ListViewHolder>() {
-
-    private val list = ArrayList<History>()
+class ListHistoryAdapter() : PagedListAdapter<History,ListHistoryAdapter.ListViewHolder>(HistoryComparator()) {
 
     inner class ListViewHolder(val binding : ItemRowDataBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(history: History) {
@@ -25,7 +24,8 @@ class ListHistoryAdapter() : RecyclerView.Adapter<ListHistoryAdapter.ListViewHol
     }
 
     override fun onBindViewHolder(holder: ListHistoryAdapter.ListViewHolder, position: Int) {
-        holder.bind(list[position])
+        val history = getItem(position) as History
+        holder.bind(history)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListHistoryAdapter.ListViewHolder {
@@ -33,11 +33,14 @@ class ListHistoryAdapter() : RecyclerView.Adapter<ListHistoryAdapter.ListViewHol
         return ListViewHolder((view))
     }
 
-    override fun getItemCount() : Int  = list.size
+    class HistoryComparator : DiffUtil.ItemCallback<History>() {
+        override fun areItemsTheSame(oldItem: History, newItem: History): Boolean {
+            return oldItem === newItem
+        }
 
-    fun loadListUser(history: List<History>) {
-        list.clear()
-        list.addAll(history)
-        notifyDataSetChanged()
+        override fun areContentsTheSame(oldItem: History, newItem: History): Boolean {
+            return oldItem.id == newItem.id
+        }
     }
+
 }

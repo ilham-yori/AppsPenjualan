@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
-import androidx.lifecycle.ViewModelProvider
 import com.ilhamyp.appspenjualan.databinding.ActivityDetailDataBinding
 import com.ilhamyp.appspenjualan.model.History
 import com.ilhamyp.appspenjualan.model.Mobil
@@ -154,7 +153,7 @@ class DetailDataActivity : AppCompatActivity() {
                         val editTextInput = inputEditTextField.text.toString()
                         var total = editTextInput.toInt() + mobil.stock.toInt()
                         mobilViewModel.updateStockMobil(total.toString(), mobil.id!!)
-                        val intent = Intent(this, MotorActivity::class.java)
+                        val intent = Intent(this, MobilActivity::class.java)
                         startActivity(intent)
                         this.finish()
                     }

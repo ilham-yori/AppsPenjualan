@@ -3,7 +3,6 @@ package com.ilhamyp.appspenjualan
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ilhamyp.appspenjualan.adapter.ListMobilAdapater
 import com.ilhamyp.appspenjualan.databinding.ActivityMobilBinding
@@ -23,13 +22,12 @@ class MobilActivity : AppCompatActivity() {
 
         adapter = ListMobilAdapater()
         binding?.rvMobil?.layoutManager = LinearLayoutManager(this)
-        binding?.rvMobil?.setHasFixedSize(true)
         binding?.rvMobil?.adapter = adapter
 
         mobilViewModel = ObtainViewModel.getMobilViewModel(this@MobilActivity)
         mobilViewModel.getAllMobil().observe(this){ mobilList ->
             if (mobilList != null) {
-                adapter.loadListUser(mobilList)
+                adapter.submitList(mobilList)
             }
         }
 
